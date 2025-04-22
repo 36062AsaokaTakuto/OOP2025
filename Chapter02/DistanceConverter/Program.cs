@@ -2,7 +2,9 @@
 using System.Threading;
 
 namespace DistanceConverter {
+
     internal class Program {
+        
         //コマンドライン引数で指定された範囲のフィートとメートルの対応表を出力する
         static void Main(string[] args) {
 
@@ -20,7 +22,7 @@ namespace DistanceConverter {
         static void PrintFeetToMeterList(int start, int end) {
             for (int feet = start; feet <= end; feet++) {
                 //double meter = feet * 0.3048;
-                double meter = FeetToMeter(feet);
+                double meter = FeetConverter.ToMeter(feet);
                 Console.WriteLine($"{feet}ft = {meter:0.0000}m");
             }
         }
@@ -29,19 +31,11 @@ namespace DistanceConverter {
         static void PrintMeterToFeetList(int start, int end) {
             for (int meter = start; meter <= end; meter++) {
                 //double meter = feet * 0.3048;
-                double feet = MeterToFeet(meter);
+                double feet = FeetConverter.FromMeter(meter);
                 Console.WriteLine($"{meter}m = {feet:0.0000}ft");
 
 
             }
-        }
-        //フィートからメートル
-        static double FeetToMeter(int feet) {
-            return feet * 0.3048;
-        }
-
-        static double MeterToFeet(int meter) {
-            return meter / 0.3048;
         }
 
 
