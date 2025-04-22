@@ -9,8 +9,13 @@ namespace Exercize02{
         //定数
         private const double retio = 0.0254;
         //インチからメートルを求める
-        public static double ToMeter(double meter) {
-            return meter * retio;
+        public static double ToMeter(double inch) {
+            return inch * retio;
+        }
+
+        //メートルからインチを求める
+        public static double FromMeter(double meter) {
+            return meter / retio;
         }
     }
 }
