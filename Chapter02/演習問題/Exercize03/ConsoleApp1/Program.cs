@@ -11,7 +11,7 @@
                 PrintMeterToYardList(num);
             }
         }
-        // インチからメートルへの対応表を出力
+        // ヤードからメートルへの対応表を出力
         static void PrintYardToMeterList(int num) {
             int yard = num;
             double meter = YardConverter.ToMeter(yard);
@@ -19,11 +19,12 @@
 
         }
 
-        //メートルからフィートへの対応表を出力
+        //メートルからヤードへの対応表を出力
         static void PrintMeterToYardList(int num) {
             int meter = num;
             double yard = YardConverter.FromMeter(meter);
             Console.WriteLine($"{meter}m = {yard:0.000}yard");
         }
+
     }
 }

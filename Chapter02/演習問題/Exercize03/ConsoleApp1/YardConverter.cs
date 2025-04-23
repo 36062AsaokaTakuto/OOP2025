@@ -17,5 +17,6 @@ namespace Exercize02{
         public static double FromMeter(double meter) {
             return meter / retio;
         }
+
     }
 }
