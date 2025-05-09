@@ -17,7 +17,7 @@ namespace SalesCalculator{
 
         //店舗別売り上げを求める
         public IDictionary<string,int> GetPerStoreSales() {//IDictionary　汎用性高い
-            var dict = new SortedDictionary<string, int>();//SortedDictionar　結果がソートされる
+            var dict = new Dictionary<string, int>();//SortedDictionar　結果がソートされる
             foreach (Sale sale in _sales) {
                 if (dict.ContainsKey(sale.ShopName)) {
                     dict[sale.ShopName] += sale.Amount;
@@ -31,11 +31,11 @@ namespace SalesCalculator{
         //売り上げデータを読み込み、Saleオブジェクトのリストを返す
         public static IEnumerable<Sale> ReadSales(string filePath) {
             //売り上げデータを入れるリストオブジェクトを生成
-            List<Sale> sales = new List<Sale>();
+            var sales = new List<Sale>();
             //ファイルを一気に読み込み
-            string[] lines = File.ReadAllLines(filePath);
+            var lines = File.ReadAllLines(filePath);
             //読み込んだ行数分繰り返し
-            foreach (string line in lines) {
+            foreach (var line in lines) {
                 string[] items = line.Split(',');
                 Sale sale = new Sale() {
                     ShopName = items[0],
