@@ -1,0 +1,25 @@
+﻿namespace Section01 {
+    internal class Program {
+        static void Main(string[] args) {
+            Console.Write("カウントしたい数値：");
+            int num = int.Parse(Console.ReadLine());
+            Count(num);
+
+
+        }
+
+        static int Count(int num) {
+            var numbers = new[] { 5, 6, 9, 6, 7, 5, 8, 1, 0, 5, 10, 4 };
+            var count = 0;
+            foreach (var n in numbers) {
+                if (n == num) {
+                    count++;
+                }
+                
+            }
+            Console.WriteLine(count);
+            return count;
+            
+        }
+    }
+}
