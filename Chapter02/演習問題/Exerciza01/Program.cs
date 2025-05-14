@@ -8,13 +8,13 @@
             // 何件入力あるかわからないので無限ループ
             while (true) {
                 Console.Write("曲名:");
-                string title = Console.ReadLine();
+                string? title = Console.ReadLine();
 
                 //endが入力されたら登録終了
-                if (title.Equals("end",StringComparison.OrdinalIgnoreCase)) return;
+                if (title.Equals("end",StringComparison.OrdinalIgnoreCase)) break;
 
                 Console.Write("アーティスト名:");
-                string artistName = Console.ReadLine();
+                string? artistName = Console.ReadLine();
 
                 Console.Write("演奏時間(秒):");
                 int length = int.Parse(Console.ReadLine());
@@ -36,7 +36,7 @@
         }
 
         //2.1.4
-        private static void printSongs(List<Song> songs) {
+        private static void printSongs(IEnumerable<Song> songs) {
 #if false
             foreach (var song in songs) {
                 var minutes = song.Length / 60;
