@@ -3,9 +3,7 @@
         static void Main(string[] args) {
             Console.Write("カウントしたい数値：");
             int num = int.Parse(Console.ReadLine());
-            Count(num);
-
-
+            Console.WriteLine(Count(num));
         }
 
         static int Count(int num) {
@@ -15,11 +13,10 @@
                 if (n == num) {
                     count++;
                 }
-                
+
             }
-            Console.WriteLine(count);
             return count;
-            
+
         }
     }
 }
