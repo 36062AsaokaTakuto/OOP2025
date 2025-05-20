@@ -40,7 +40,8 @@ namespace Exercize02 {
         }
 
         private static void Exercise2_2(List<string> names) {
-
+            Console.WriteLine(names.Count( s => s.Contains('o')));
+            //s.Contains('o')：都市名にoが含まれてるかチェック
         }
 
         private static void Exercise2_3(List<string> names) {
