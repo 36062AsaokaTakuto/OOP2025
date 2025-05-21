@@ -34,10 +34,11 @@ namespace Exercize01 {
 
         private static void Exercise3(List<int> numbers) {
             numbers.Where(n => n >= 50).ToList().ForEach(n => Console.WriteLine(n));
-        }
+        }//できなかった部分（.ForEach(n => Console.WriteLine(n))）
 
         private static void Exercise4(List<int> numbers) {
             numbers.Select(n => n * 2).ToList().ForEach(n => Console.WriteLine(n));
-        }
+        }//できなかった部分（.ForEach(n => Console.WriteLine(n))）
+
     }
 }
