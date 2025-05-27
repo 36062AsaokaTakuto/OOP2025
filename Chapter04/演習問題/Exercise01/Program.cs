@@ -26,7 +26,7 @@ namespace Exercise01 {
 
             //for文
             for (int i = 0; i < langs.Count; i++) {
-                if (langs[i].Contains('S')) 
+                if (langs[i].Contains('S'))
                     Console.WriteLine(langs[i]);
             }
 
@@ -42,16 +42,11 @@ namespace Exercise01 {
         }
 
         private static void Exercise2(List<string> langs) {
-            //langs.Where(s => s.Contains('S')).ToList().ForEach(s => Console.WriteLine(s));
-            var selectrd = langs.Where(x => x.Contains('S'));
-            foreach(var lang in selectrd) {
-                Console.WriteLine(lang);
-            }
+            langs.Where(s => s.Contains('S')).ToList().ForEach(s => Console.WriteLine(s));
         }
 
         private static void Exercise3(List<string> langs) {
-            Console.WriteLine(langs.Find(x => x.Length == 10)　?? "unknown");
-
+            Console.WriteLine(langs.Find(s => s.Length == 10) ?? "unknown");
         }
     }
 }
