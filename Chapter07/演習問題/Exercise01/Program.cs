@@ -36,9 +36,9 @@ namespace Exercise01 {
         }
 
         private static void Exercise3(int[] numbers) {
-            var num = numbers.Select(n => n.ToString("000")).ToArray();
-            foreach (var n in num) {
-                Console.WriteLine(n);
+            var strs = numbers.Select(n => n.ToString("000"));
+            foreach (var s in strs) {
+                Console.WriteLine(s);
             }
             
         }
@@ -50,7 +50,9 @@ namespace Exercise01 {
         }
 
         private static void Exercise5(int[] numbers) {
-
+            var dis = numbers.Distinct().Where(n => n > 10);
+                Console.WriteLine(dis.Count());
+ 
         }
     }
 }
