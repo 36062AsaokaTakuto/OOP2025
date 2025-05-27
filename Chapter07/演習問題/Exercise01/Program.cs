@@ -25,19 +25,30 @@ namespace Exercise01 {
         }
 
         private static void Exercise2(int[] numbers) {
-            
+            foreach (var n in numbers.TakeLast(2)){
+                Console.WriteLine(n);
+            }
+
+            //foreach (var n in numbers.Skip(numbers.Length - 2)) {
+            //    Console.WriteLine(n);
+            //}
+
         }
 
         private static void Exercise3(int[] numbers) {
-            throw new NotImplementedException();
+            var num = numbers.Select(n => n.ToString("000")).ToArray();
+            foreach (var n in num) {
+                Console.WriteLine(n);
+            }
+            
         }
 
         private static void Exercise4(int[] numbers) {
-            throw new NotImplementedException();
+            
         }
 
         private static void Exercise5(int[] numbers) {
-            throw new NotImplementedException();
+
         }
     }
 }
