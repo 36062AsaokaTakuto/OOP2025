@@ -44,14 +44,14 @@ namespace Exercise01 {
         }
 
         private static void Exercise4(int[] numbers) {
-            foreach (var n in numbers.OrderBy(n => n).Take(3)) {
+            foreach (var n in numbers.Order().Take(3)) {
                 Console.WriteLine(n);
             }
         }
 
         private static void Exercise5(int[] numbers) {
-            var dis = numbers.Distinct().Where(n => n > 10);
-                Console.WriteLine(dis.Count());
+            var count = numbers.Distinct().Count(n => n >= 10);
+                Console.WriteLine(count);
  
         }
     }
