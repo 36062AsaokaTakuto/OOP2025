@@ -52,7 +52,9 @@ namespace Exercise02 {
         }
 
         private static void Exercise4(List<Book> books) {
-            
+            var titles = books.FirstOrDefault(b => b.Price >= 4000);
+            if (titles is not null)
+                Console.WriteLine(titles.Title);
         }
 
         private static void Exercise5(List<Book> books) {
