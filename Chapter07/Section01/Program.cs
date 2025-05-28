@@ -11,22 +11,22 @@
             Console.WriteLine(books.Sum(x => x.Pages));
             Console.WriteLine("-----");
             //③金額の安い書籍名と金額を表示
-            var minPrice = books.Min(x => x.Price);
-            var minbook = books.Where(x => x.Price == minPrice);
-            foreach (var book in minbook) {
-                Console.WriteLine(book.Title + ":" + minPrice + "円");
+            var minPrice = books.Where(x => x.Price == books.Min(b => b.Price));
+            foreach (var book in minPrice) {
+                Console.WriteLine(book.Title + ":" + book.Price + "円");
             }
             Console.WriteLine("-----");
             //④ページが多い書籍名とページ数を表示
-            var maxPages = books.Max(x => x.Pages);
-            var maxbook = books.Where(x => x.Pages == maxPages);
-            foreach (var book in maxbook) {
-                Console.WriteLine(book.Title + ":" + maxPages + "ページ");
+            var maxPages = books.Where(x => x.Pages == books.Max(b => b.Pages));
+            foreach (var book in maxPages) {
+                Console.WriteLine(book.Title + ":" + book.Pages + "ページ");
             }
+            //一行バージョン
+            //books.Where(x => x.Pages == books.Max(b => b.Pages)).ToList().ForEach(x => Console.WriteLine($"{x.Title} : {x.Pages}ページ"));
             Console.WriteLine("-----");
             //⑤タイトルに「物語」が含まれている書籍名をすべて表示
-            var story = books.Where(s =>s.Title.Contains("物語"));
-            foreach (var book in story) {
+            var stories = books.Where(x =>x.Title.Contains("物語"));
+            foreach (var book in stories) {
                 Console.WriteLine(book.Title);
             }
 
