@@ -36,18 +36,19 @@ namespace Exercise02 {
         }
 
         private static void Exercise1(List<Book> books) {
-            var titles = books.Where(x => x.Title.Contains("ワンダフル・C#ライフ"));
-            foreach (var book in titles) {
-                Console.WriteLine(book.Price + "円：" + book.Pages + "ページ");
-            }
+            var book = books.FirstOrDefault(b => b.Title == "ワンダフル・C#ライフ");
+            if (book is not null)
+                Console.WriteLine("{0} {1}",book.Price, book.Pages);
+            
         }
 
         private static void Exercise2(List<Book> books) {
-            Console.WriteLine(books.Count(s => s.Title.Contains("C#")));
+            Console.WriteLine(books.Count(s => s.Title.Contains("C#")) + "冊");
         }
 
         private static void Exercise3(List<Book> books) {
-            
+            var pages = books.Where(x => x.Title.Contains("C#")).Average(x => x.Pages);
+            Console.WriteLine((int)pages);
         }
 
         private static void Exercise4(List<Book> books) {
