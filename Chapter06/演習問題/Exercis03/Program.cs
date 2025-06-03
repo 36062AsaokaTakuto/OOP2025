@@ -32,13 +32,14 @@ namespace Exercis03 {
         }
 
         private static void Exercise3(string text) {
-        //    var split = text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        //    var sb = new StringBuilder();
-        //    foreach (var item in split) {
-        //        sb.Append(item);
-        //    }
-        //    var ap = sb.ToString();
-        //    Console.WriteLine(ap);
+            var array = text.Split([ ' ' ], StringSplitOptions.RemoveEmptyEntries);
+            var sb = new StringBuilder(array[0]);
+            foreach (var word in array.Skip(1)) {
+                sb.Append(' ');
+                sb.Append(word);
+            }
+            sb.Append('.');
+            Console.WriteLine(sb);
         }
 
         private static void Exercise4(string text) {
