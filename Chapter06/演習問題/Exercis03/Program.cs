@@ -21,6 +21,9 @@ namespace Exercis03 {
             Console.WriteLine("6.3.5");
             Exercise5(text);
 
+            Console.WriteLine("6.3.99");
+            Exercise6(text);
+
         }
 
         private static void Exercise1(string text) {
@@ -32,7 +35,7 @@ namespace Exercis03 {
         }
 
         private static void Exercise3(string text) {
-            var array = text.Split([ ' ' ], StringSplitOptions.RemoveEmptyEntries);
+            var array = text.Split([' '], StringSplitOptions.RemoveEmptyEntries);
             var sb = new StringBuilder(array[0]);
             foreach (var word in array.Skip(1)) {
                 sb.Append(' ');
@@ -52,6 +55,15 @@ namespace Exercis03 {
             var str4 = word.Where(x => x.Length <= 4);
             foreach (var item in str4) {
                 Console.WriteLine(item);
+            }
+        }
+
+        private static void Exercise6(string text) {
+            char str = 'a';
+            while (str <= 'z') {
+                var count = text.ToLower().Count(x => x == str);
+                Console.WriteLine($"{str}:{count}");
+                str++;
             }
         }
     }
