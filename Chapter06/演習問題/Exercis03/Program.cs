@@ -1,4 +1,5 @@
 ﻿
+using System.Data.SqlTypes;
 using System.Text;
 
 namespace Exercis03 {
@@ -42,7 +43,7 @@ namespace Exercis03 {
                 sb.Append(word);
             }
             sb.Append('.');
-            Console.WriteLine(sb);
+            Console.WriteLine(sb); 
         }
 
         private static void Exercise4(string text) {
@@ -59,11 +60,47 @@ namespace Exercis03 {
         }
 
         private static void Exercise6(string text) {
-            char str = 'a';
-            while (str <= 'z') {
-                var count = text.ToLower().Count(x => x == str);
-                Console.WriteLine($"{str}:{count}");
-                str++;
+            //辞書で集計
+            var str = text.ToLower().Replace(" ","");
+
+            var alphDicCount = Enumerable.Range('a', 26)
+                .ToDictionary(num => ((char)num).ToString(),num => 0);
+            foreach (var alph in str) {
+                alphDicCount[alph.ToString()]++;
+            }
+
+            foreach (var item in alphDicCount) {
+                Console.WriteLine($"{item.Key}:{item.Value}");
+            }
+
+            Console.WriteLine("");
+
+            //配列で集計
+            var array = Enumerable.Repeat(0, 26).ToArray();
+            foreach (var alph in str) {
+                array[alph - 'a']++;
+
+            }
+
+            for (char ch = 'a'; ch <= 'z'; ch++) {
+                Console.WriteLine($"{ch}:{array[ch - 'a']}");
+            }
+
+            Console.WriteLine("");
+
+            //'a'から順にカウントして出力
+            for (char ch = 'a'; ch <= 'z'; ch++) {
+                Console.WriteLine($"{ch}:{text.Count(tc => tc == ch)}");
+            }
+
+            Console.WriteLine("");
+
+            //自分で考えたやつ
+            char str1 = 'a';
+            while (str1 <= 'z') {
+                var count = text.ToLower().Count(x => x == str1);//[ToLower]すべて小文字に変換
+                Console.WriteLine($"{str1}:{count}");
+                str1++;
             }
         }
     }
