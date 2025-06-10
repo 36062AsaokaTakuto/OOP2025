@@ -25,16 +25,16 @@ namespace Exercise02 {
 
         //5.2.2
         private static void Exercise2(YearMonth[] ymCollection) {
-            foreach (var item in ymCollection) {
-                Console.WriteLine(item);
+            foreach (var ym in ymCollection) {
+                Console.WriteLine(ym);
             }
         }
 
         //5.2.3
         private static YearMonth? FindFirst21C(YearMonth[] ymCollection) {
-            foreach (var item in ymCollection) {
-                if (item.Is21Century) {
-                    return item;
+            foreach (var ym in ymCollection) {
+                if (ym.Is21Century) {
+                    return ym;
                 }
             }
             return null;
@@ -54,7 +54,15 @@ namespace Exercise02 {
 
         //5.2.5
         private static void Exercise5(YearMonth[] ymCollection) {
-            
+            var array = ymCollection.Select(o => o.AddOneMonth()).ToArray();
+            foreach (var ym in array) {
+                Console.WriteLine(ym);
+            }
+            //foreach (var ym in ymCollection) {
+            //    var addMonth = ym.AddOneMonth();
+            //    new YearMonth(addMonth.Year, addMonth.Month);
+            //    Console.WriteLine(addMonth);
+            //}
         }
     }
 }
