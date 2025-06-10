@@ -7,14 +7,7 @@ using System.Threading.Tasks;
 
 namespace Exercise01{
     //5.1.1
-    public class YearMonth{
-        public int Year { get; init; }
-        public int Month { get; init; }
-
-        public YearMonth(int year,int month) {
-            Year = year;
-            Month = month;
-        }
+    public record YearMonth(int Year, int Month) {
 
         //5.1.2
         //設定されている西暦が21世紀か特定する
@@ -23,7 +16,7 @@ namespace Exercise01{
 
         //5.1.3
         public YearMonth AddOneMonth() {
-            if (Month != 12) {
+            if (Month <= 11) {
                 return new YearMonth(Year, Month + 1);//Monthが12月以外
             } else {
                 return new YearMonth(Year + 1, 1);//Monthが12月
