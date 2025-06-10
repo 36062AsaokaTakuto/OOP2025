@@ -43,21 +43,39 @@ namespace Exercise02 {
 
         //5.2.4
         private static void Exercise4(YearMonth[] ymCollection) {
-            var first21 = FindFirst21C(ymCollection);
-            if (first21 != null) {
-                Console.WriteLine(FindFirst21C(ymCollection));
-            } else {
-                Console.WriteLine("21世紀のデータはありません");
-            }
-            
+            //var ym = FindFirst21C(ymCollection);
+            //if (ym is null) {
+            //    Console.WriteLine("21世紀のデータはありません");
+            //} else {
+            //    Console.WriteLine(ym);
+            //}
+
+            //null合体演算子,null条件演算子
+            //var yearMonth = FindFirst21C(ymCollection);
+            //var str = yearMonth?.ToString() ?? "21世紀のデータはありません";
+            //Console.WriteLine(str);
+
+            Console.WriteLine(FindFirst21C(ymCollection)?.ToString() ?? "21世紀のデータはありません");
+
+
+
+
+
+            //var first21 = FindFirst21C(ymCollection);
+            //if (first21 != null) {
+            //    Console.WriteLine(FindFirst21C(ymCollection));
+            //} else {
+            //    Console.WriteLine("21世紀のデータはありません");
+            //} 
         }
+
+
 
         //5.2.5
         private static void Exercise5(YearMonth[] ymCollection) {
-            var array = ymCollection.Select(o => o.AddOneMonth()).ToArray();
-            foreach (var ym in array) {
-                Console.WriteLine(ym);
-            }
+            var array = ymCollection.Select(ym => ym.AddOneMonth()).ToArray();
+            Exercise2(array);
+            //Linqなし
             //foreach (var ym in ymCollection) {
             //    var addMonth = ym.AddOneMonth();
             //    new YearMonth(addMonth.Year, addMonth.Month);
