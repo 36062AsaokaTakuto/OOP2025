@@ -23,18 +23,24 @@ namespace Exercise02 {
             Exercise5(ymCollection);
         }
 
+        //5.2.2
         private static void Exercise2(YearMonth[] ymCollection) {
             foreach (var item in ymCollection) {
                 Console.WriteLine(item);
             }
         }
 
+        //5.2.3
+
+
+        //5.2.4
         private static void Exercise4(YearMonth[] ymCollection) {
-            throw new NotImplementedException();
+            
         }
 
+        //5.2.5
         private static void Exercise5(YearMonth[] ymCollection) {
-            throw new NotImplementedException();
+            
         }
     }
 }
