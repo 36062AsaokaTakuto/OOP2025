@@ -23,12 +23,10 @@ namespace Exercise01{
 
         //5.1.3
         public YearMonth AddOneMonth() {
-            var newYear = Year;
-            var newMonth = Month + 1;
             if (Month != 12) {
-                return new YearMonth(newYear, newMonth);//Monthが12月以外
+                return new YearMonth(Year, Month + 1);//Monthが12月以外
             } else {
-                return new YearMonth(newYear + 1, newMonth = 1);//Monthが12月
+                return new YearMonth(Year + 1, 1);//Monthが12月
             }
                 
         }

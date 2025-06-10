@@ -31,10 +31,24 @@ namespace Exercise02 {
         }
 
         //5.2.3
-
+        private static YearMonth? FindFirst21C(YearMonth[] ymCollection) {
+            foreach (var item in ymCollection) {
+                if (item.Is21Century) {
+                    return item;
+                }
+            }
+            return null;
+            
+        }
 
         //5.2.4
         private static void Exercise4(YearMonth[] ymCollection) {
+            var first21 = FindFirst21C(ymCollection);
+            if (first21 != null) {
+                Console.WriteLine(FindFirst21C(ymCollection));
+            } else {
+                Console.WriteLine("21世紀のデータはありません");
+            }
             
         }
 
