@@ -13,7 +13,7 @@ namespace Exercise01 {
 
         private static void Exercise1(string text) {
             //①ディクショナリインスタンスの作成
-            var dict = new Dictionary<char, int>();
+            var dict = new SortedDictionary<char, int>();
             //②1文字取り出す
             //'A'…0x41
             //③大文字に変換
@@ -31,7 +31,7 @@ namespace Exercise01 {
                 //⑤②へ戻る
             }
             //⑥すべての文字が読み終えたら、アルファベット順に並び替えて出力
-            foreach (var c in dict.OrderBy(d => d.Key)) {
+            foreach (var c in dict) {
                 Console.WriteLine($"{c.Key}:{c.Value}");
             }
 
