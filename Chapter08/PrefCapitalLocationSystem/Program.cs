@@ -91,6 +91,12 @@
         private static void searchPrefCaptalLocation() {
             Console.Write("都道府県:");
             String? searchPref = Console.ReadLine();
+            foreach (var item in prefOfficeDict) {
+                if (prefOfficeDict.ContainsKey(searchPref)) {
+                        Console.WriteLine($"{item.Key}{item.Value}");
+                }
+            }
+            
         }
     }
 }
