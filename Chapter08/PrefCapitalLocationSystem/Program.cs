@@ -28,19 +28,18 @@
                 //*　ここに入力　*******************//
                 if (prefOfficeDict.ContainsKey(pref)) {
                     Console.WriteLine("上書きしますか？(Y/N)");
-                    var copy = Console.ReadLine();
-                    if (copy == "Y") {
-                        prefOfficeDict[pref] = prefCaptalLocation;
-                    } else {
-                        continue;
-                    }
-
-                    //県庁所在地登録処理
-
-                    //*　ここに入力　*******************//
-                } else {
-                    prefOfficeDict.Add(pref, prefCaptalLocation);
+                    //var copy = Console.ReadLine();
+                    //if (copy == "Y") {
+                    //    prefOfficeDict[pref] = prefCaptalLocation;
+                    //} else {
+                    //    continue;
+                    //}
+                    if (Console.ReadLine() == "N") continue;
                 }
+                //県庁所在地登録処理
+
+                //*　ここに入力　*******************//
+                prefOfficeDict[pref] = prefCaptalLocation ?? "** 未入力 **";
 
                 Console.WriteLine();//改行
             }
@@ -83,7 +82,7 @@
 
             //*　ここに入力　*******************//
             foreach (var item in prefOfficeDict) {
-                Console.WriteLine($"{item.Key}{item.Value}");
+                Console.WriteLine($"{item.Key}の県庁所在地は{item.Value}です。");
             }
         }
 
@@ -91,11 +90,10 @@
         private static void searchPrefCaptalLocation() {
             Console.Write("都道府県:");
             String? searchPref = Console.ReadLine();
-            foreach (var item in prefOfficeDict) {
-                if (prefOfficeDict.ContainsKey(searchPref)) {
-                        Console.WriteLine($"{item.Key}{item.Value}");
-                }
-            }
+            //*　ここに入力　*******************//
+            if (searchPref is null) return;
+            Console.WriteLine(searchPref + "の県庁所在地は" + prefOfficeDict[searchPref] + "です。");
+            
             
         }
     }
