@@ -26,12 +26,21 @@
                 //ヒント：Console.WriteLine("上書きしますか？(Y/N)");
 
                 //*　ここに入力　*******************//
+                if (prefOfficeDict.ContainsKey(pref)) {
+                    Console.WriteLine("上書きしますか？(Y/N)");
+                    var copy = Console.ReadLine();
+                    if (copy == "Y") {
+                        prefOfficeDict[pref] = prefCaptalLocation;
+                    } else {
+                        continue;
+                    }
 
+                    //県庁所在地登録処理
 
-                //県庁所在地登録処理
-
-                //*　ここに入力　*******************//
-
+                    //*　ここに入力　*******************//
+                } else {
+                    prefOfficeDict.Add(pref, prefCaptalLocation);
+                }
 
                 Console.WriteLine();//改行
             }
@@ -50,7 +59,8 @@
 
 
                     case "9"://無限ループを抜ける
-
+                        //* ここに入力 *****************//
+                        endFlag = true;
                         break;
                 }
             }
@@ -72,6 +82,9 @@
         private static void allDisp() {
 
             //*　ここに入力　*******************//
+            foreach (var item in prefOfficeDict) {
+                Console.WriteLine($"{item.Key}{item.Value}");
+            }
         }
 
         //検索処理
