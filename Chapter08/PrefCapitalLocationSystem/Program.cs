@@ -1,4 +1,4 @@
-﻿namespace PrefCapitalLocationSystem {
+﻿namespace PrefCapitalLocationSystem {//8.1完成以降は5章と間違えてました8章です。
     internal class Program {
         static private Dictionary<string, string> prefOfficeDict = new Dictionary<string, string>();
 
