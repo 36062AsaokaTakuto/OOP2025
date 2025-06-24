@@ -25,7 +25,8 @@ namespace Section01 {
             var str = birth.ToString("ggyy年y月d日",culture);
 
             var dayOfWeek = culture.DateTimeFormat.GetShortestDayName(birth.DayOfWeek); ;
-            Console.WriteLine(str + dayOfWeek + "曜日");
+            //Console.WriteLine(str + dayOfWeek + "曜日");
+            Console.WriteLine(str + birth.ToString("ddd曜日",culture));
 
             //自分の
             //string[] japaneseDays = { "日", "月", "火", "水", "木", "金", "土" };
@@ -41,8 +42,38 @@ namespace Section01 {
             //}
 
             //②うるう年の判定プログラム
-            var LeapYear = DateTime.IsLeapYear(2006);
+            var LeapYear = DateTime.IsLeapYear(year);
+            if (LeapYear) {
+                Console.WriteLine("閏年です");
+            } else {
+                Console.WriteLine("閏年ではありません");
+            }
 
+            //③生まれてから〇日目
+            var today = DateTime.Today;
+            TimeSpan df = DateTime.Today - birth;
+            Console.WriteLine($"生まれてから{df.Days}日目");
+
+            //TimeSpan diff;
+            //while (true) {
+            //    diff = DateTime.Now - birth;
+            //    Console.WriteLine($"\r{diff.TotalSeconds}秒");//生まれてからの経過秒数
+            //}//無限ループ
+
+            //④あなたは〇歳です！
+            int age = GetAge(birth, today);
+            Console.WriteLine($"あなたは{age}歳です！");
+
+            //⑤1月1日から何日目か？
+            int dayOfYear = today.DayOfYear;
+            Console.WriteLine($"1月1日から{dayOfYear}日経過");
+        }
+        static int GetAge(DateTime birthday,DateTime targetDay) {
+            var age = targetDay.Year - birthday.Year;
+            if (targetDay < birthday.AddYears(age)) {
+                age--;
+            }
+            return age;
         }
     }
 }
