@@ -16,7 +16,7 @@
 
         public void Start() {
             //現在の時間を_timeに設定
-
+            _time = 
         }
 
         public TimeSpan Stop() {
