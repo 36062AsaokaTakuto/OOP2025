@@ -27,9 +27,20 @@ namespace Exercize01 {
         private static void DisPlayDatePattern3(DateTime dateTime) {
             var culture = new CultureInfo("jp-JP");
             culture.DateTimeFormat.Calendar = new JapaneseCalendar();
-            var str = dateTime.ToString("ggyy年MM月dd日", culture);
-            Console.WriteLine(str + dateTime.ToString("ddd曜日", culture));
 
+            //和暦が2桁表示（ゼロサブレスなし）
+            var datestr = dateTime.ToString("ggyy", culture);
+            var dayOfWeek = culture.DateTimeFormat.GetDayName(dateTime.DayOfWeek);
+
+            var str = dateTime.ToString($"{datestr}年{dateTime.Month,2}月{dateTime.Day,2}日({dayOfWeek})");
+            Console.WriteLine(str);
+
+            //和暦が2桁表示（ゼロサブレスあり）
+            var cul = dateTime.ToString("gg", culture);
+            var year = int.Parse(dateTime.ToString("yy", culture));
+
+            var str2 = dateTime.ToString($"{cul}{year,2}年{dateTime.Month,2}月{dateTime.Day,2}日({dayOfWeek})");
+            Console.WriteLine(str2);
         }
     }
 }
