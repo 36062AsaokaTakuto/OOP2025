@@ -44,9 +44,11 @@ namespace Exercise02 {
 
         // 9.2.2【ここにプログラムを作成する】
         static int GetAge(DateOnly birthday, DateOnly targetDay) {
-
-
-            return 0; //ダミー
+            var age = targetDay.Year - birthday.Year;
+            if (targetDay < birthday.AddYears(age)) {
+                age--;
+            }
+            return age;
         }
     }
 }
