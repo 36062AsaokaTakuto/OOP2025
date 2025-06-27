@@ -16,13 +16,13 @@
 
         public void Start() {
             //現在の時間を_timeに設定
-            _time = 
+            _time = DateTime.Now;
         }
 
         public TimeSpan Stop() {
             //経過時間を返却する
-
-            return new TimeSpan(); // ←エラーを出さないためだけのダミー（使い方も参考にしない）
+            Console.WriteLine(_time);
+            return ; // ←エラーを出さないためだけのダミー（使い方も参考にしない）
         }
     }
 }
