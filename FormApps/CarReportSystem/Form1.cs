@@ -28,7 +28,7 @@ namespace CarReportSystem {
                 //未登録なら登録【登録済みなら何もしない】
                 cbAuthor.Items.Add(author);
             }
-                 
+
         }
 
         //記録者の履歴をコンボボックスへ登録（重複なし）
@@ -116,9 +116,31 @@ namespace CarReportSystem {
                     break;
             }
         }
-
+        //新規入力のイベントハンドラ
         private void btNewRecord_Click(object sender, EventArgs e) {
-            InputItemsAllClear();//登録後は項目をクリア
+            InputItemsAllClear();//ボタンを押したら項目をクリア
+        }
+
+        //修正ボタンのイベントハンドラ
+        private void btRecordModify_Click(object sender, EventArgs e) {
+            listCarReports[3].Author = "aaaaa";//ヒント
+
+
+        }
+
+        //削除ボタンのイベントハンドラ
+        private void btRecordDelete_Click(object sender, EventArgs e) {
+            //カーレポート管理用リストから、
+            //該当するデータを削除する
+            if (dgvRecord.CurrentRow is not null) {
+                int index = dgvRecord.CurrentRow.Index;
+                listCarReports.RemoveAt(index);
+            }
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            InputItemsAllClear();
         }
     }
 }

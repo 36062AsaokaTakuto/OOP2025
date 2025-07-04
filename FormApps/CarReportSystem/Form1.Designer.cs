@@ -306,6 +306,7 @@
             btRecordModify.TabIndex = 7;
             btRecordModify.Text = "修正";
             btRecordModify.UseVisualStyleBackColor = true;
+            btRecordModify.Click += btRecordModify_Click;
             // 
             // btRecordDelete
             // 
@@ -317,6 +318,7 @@
             btRecordDelete.TabIndex = 7;
             btRecordDelete.Text = "削除";
             btRecordDelete.UseVisualStyleBackColor = true;
+            btRecordDelete.Click += btRecordDelete_Click;
             // 
             // ofdPicFileOpen
             // 
@@ -360,6 +362,7 @@
             Controls.Add(label1);
             Name = "Form1";
             Text = "試乗レポート管理システム";
+            Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRecord).EndInit();
