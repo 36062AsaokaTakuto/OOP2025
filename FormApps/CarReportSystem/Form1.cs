@@ -24,9 +24,7 @@ namespace CarReportSystem {
         //‹L˜^Ò‚Ì—š—ğ‚ğƒRƒ“ƒ{ƒ{ƒbƒNƒX‚Ö“o˜^id•¡‚È‚µj
         private void setCbAuthor(string author) {
             //Šù‚É“o˜^Ï‚İ‚©Šm”F
-            if (cbAuthor.Items.Contains(author)) {
-
-            } else {
+            if (!cbAuthor.Items.Contains(author)) {
                 //–¢“o˜^‚È‚ç“o˜^y“o˜^Ï‚İ‚È‚ç‰½‚à‚µ‚È‚¢z
                 cbAuthor.Items.Add(author);
             }
@@ -35,9 +33,7 @@ namespace CarReportSystem {
 
         //‹L˜^Ò‚Ì—š—ğ‚ğƒRƒ“ƒ{ƒ{ƒbƒNƒX‚Ö“o˜^id•¡‚È‚µj
         private void setCbCarName(string CarName) {
-            if (cbCarName.Items.Contains(CarName)) {
-
-            } else {
+            if (!cbCarName.Items.Contains(CarName)) {
                 //–¢“o˜^‚È‚ç“o˜^y“o˜^Ï‚İ‚È‚ç‰½‚à‚µ‚È‚¢z
                 cbCarName.Items.Add(CarName);
             }
