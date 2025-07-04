@@ -46,7 +46,7 @@ namespace CarReportSystem {
                 Date = dtpDate.Value.Date,
                 Report = tbReport.Text,
                 Picture = pbPicture.Image,
-                Maker = GetRadioButtonMaker()
+                Maker = getRadioButtonMaker()
             };
             listCarReports.Add(carReport);
             setCbAuthor(carReport.Author);
@@ -64,7 +64,7 @@ namespace CarReportSystem {
             rbOther.Checked = true;
         }
 
-        private CarReport.MakerGroup GetRadioButtonMaker() {
+        private MakerGroup getRadioButtonMaker() {
             if (rbToyota.Checked) {
                 return MakerGroup.トヨタ;
             } else if (rbNissan.Checked) {
@@ -123,19 +123,35 @@ namespace CarReportSystem {
 
         //修正ボタンのイベントハンドラ
         private void btRecordModify_Click(object sender, EventArgs e) {
-            listCarReports[3].Author = "aaaaa";//ヒント
+            if (dgvRecord.Rows.Count == 0) return;
 
+            listCarReports[dgvRecord.CurrentRow.Index].Author = cbAuthor.Text;
+            listCarReports[dgvRecord.CurrentRow.Index].CarName = cbCarName.Text;
+            listCarReports[dgvRecord.CurrentRow.Index].Date = dtpDate.Value;
+            listCarReports[dgvRecord.CurrentRow.Index].Report = tbReport.Text;
+            listCarReports[dgvRecord.CurrentRow.Index].Picture = pbPicture.Image;
+            listCarReports[dgvRecord.CurrentRow.Index].Maker = getRadioButtonMaker();
 
+            dgvRecord.Refresh(); //データグリッドビューの更新
         }
 
         //削除ボタンのイベントハンドラ
         private void btRecordDelete_Click(object sender, EventArgs e) {
             //カーレポート管理用リストから、
             //該当するデータを削除する
-            if (dgvRecord.CurrentRow is not null) {
-                int index = dgvRecord.CurrentRow.Index;
-                listCarReports.RemoveAt(index);
-            }
+            //選択されていない場合は処理を行わない
+            if ((dgvRecord.CurrentRow == null)
+                    ||(!dgvRecord.CurrentRow.Selected)) return;
+            //選択されているインデックスを取得
+            int index = dgvRecord.CurrentRow.Index;
+            //削除したいインデックスを指定してリストから削除
+            listCarReports.RemoveAt(index);
+
+            //自分の
+            //if (dgvRecord.CurrentRow is not null) {
+            //    int index = dgvRecord.CurrentRow.Index;
+            //    listCarReports.RemoveAt(index);
+            //}
 
         }
 
