@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Runtime.Serialization.Formatters.Binary;
 using static CarReportSystem.CarReport;
 
 namespace CarReportSystem {
@@ -39,7 +40,17 @@ namespace CarReportSystem {
             }
         }
 
+        //データを追加
         private void btRecordAdd_Click(object sender, EventArgs e) {
+
+            tsslbMessage.Text = "";//String.Emptyでも可
+
+            if (cbAuthor.Text.Equals("")//cbAuthor.Text == String.Emptyでも可
+                    || cbCarName.Text.Equals("")) {
+                tsslbMessage.Text = "記録者、または車名が未入力です";
+                return;
+            }
+
             var carReport = new CarReport {
                 Author = cbAuthor.Text,
                 CarName = cbCarName.Text,
@@ -52,6 +63,7 @@ namespace CarReportSystem {
             setCbAuthor(carReport.Author);
             setCbCarName(carReport.CarName);
             InputItemsAllClear();//登録後は項目をクリア
+
         }
 
         //入力項目をすべてクリア
@@ -80,17 +92,14 @@ namespace CarReportSystem {
         }
 
         private void dgvRecord_Click(object sender, EventArgs e) {
-            if (dgvRecord.CurrentRow is null) {
-                return;
-            } else {
-                dtpDate.Value = (DateTime)dgvRecord.CurrentRow.Cells["Date"].Value;
-                cbAuthor.Text = (string)dgvRecord.CurrentRow.Cells["Author"].Value;
-                cbCarName.Text = (string)dgvRecord.CurrentRow.Cells["CarName"].Value;
-                tbReport.Text = (string)dgvRecord.CurrentRow.Cells["Report"].Value;
-                pbPicture.Image = (Image)dgvRecord.CurrentRow.Cells["Picture"].Value;
-                setRadioButtonMaker((MakerGroup)dgvRecord.CurrentRow.Cells["Maker"].Value);
-            }
+            if (dgvRecord.CurrentRow is null) return;
 
+            dtpDate.Value = (DateTime)dgvRecord.CurrentRow.Cells["Date"].Value;
+            cbAuthor.Text = (string)dgvRecord.CurrentRow.Cells["Author"].Value;
+            cbCarName.Text = (string)dgvRecord.CurrentRow.Cells["CarName"].Value;
+            tbReport.Text = (string)dgvRecord.CurrentRow.Cells["Report"].Value;
+            pbPicture.Image = (Image)dgvRecord.CurrentRow.Cells["Picture"].Value;
+            setRadioButtonMaker((MakerGroup)dgvRecord.CurrentRow.Cells["Maker"].Value);
         }
 
         //指定したメーカーのラジオボタンをセット
@@ -123,6 +132,8 @@ namespace CarReportSystem {
 
         //修正ボタンのイベントハンドラ
         private void btRecordModify_Click(object sender, EventArgs e) {
+            //if ((dgvRecord.CurrentRow is null)
+            //        || (!dgvRecord.CurrentRow.Selected)) return;
             if (dgvRecord.Rows.Count == 0) return;
 
             listCarReports[dgvRecord.CurrentRow.Index].Author = cbAuthor.Text;
@@ -140,8 +151,8 @@ namespace CarReportSystem {
             //カーレポート管理用リストから、
             //該当するデータを削除する
             //選択されていない場合は処理を行わない
-            if ((dgvRecord.CurrentRow == null)
-                    ||(!dgvRecord.CurrentRow.Selected)) return;
+            if ((dgvRecord.CurrentRow is null)
+                    || (!dgvRecord.CurrentRow.Selected)) return;
             //選択されているインデックスを取得
             int index = dgvRecord.CurrentRow.Index;
             //削除したいインデックスを指定してリストから削除
@@ -157,6 +168,88 @@ namespace CarReportSystem {
 
         private void Form1_Load(object sender, EventArgs e) {
             InputItemsAllClear();
+
+            //交互に色を設定（データグリッドビュー）
+            dgvRecord.DefaultCellStyle.BackColor = Color.LightGray;
+            dgvRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
+
+        }
+
+        private void tsmiExit_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
+
+        //このアプリについてを選択した時のイベントハンドラ
+        private void tsmiAbout_Click(object sender, EventArgs e) {
+            fmVersion fmv = new fmVersion();
+            fmv.ShowDialog();
+        }
+
+        private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (cdColor.ShowDialog() == DialogResult.OK) {//DialogResult.OK = OKを押したらって意味
+                BackColor = cdColor.Color;
+            }
+        }
+
+        //ファイルオープン処理
+        private void reportOpenFile() {
+            if (ofdReportFileOpen.ShowDialog() == DialogResult.OK) {
+                try {
+                    //逆シリアル化でバイナリ形式を取り込む
+#pragma warning disable SYSLIB0011 // 型またはメンバーが旧型式です
+                    var bf = new BinaryFormatter();
+#pragma warning restore SYSLIB0011 // 型またはメンバーが旧型式です
+                    using(FileStream fs = File.Open(
+                        ofdReportFileOpen.FileName, FileMode.Open,FileAccess.Read)) {
+
+                        listCarReports = (BindingList<CarReport>)bf.Deserialize(fs);
+                        dgvRecord.DataSource = listCarReports;
+
+                        cbAuthor.Items.Clear();
+                        cbCarName.Items.Clear();
+                        //コンボボックスに登録
+                        foreach (var report in listCarReports) {
+                            setCbAuthor(report.Author);
+                            setCbCarName(report.CarName);
+                        }
+
+                    }
+                }
+                catch (Exception) {
+                    tsslbMessage.Text = "ファイル形式が違います";
+
+                }
+            }
+        }
+
+        //ファイルセーブ処理
+        private void reportSaveFile() {
+            if (sfdReportFileSave.ShowDialog() == DialogResult.OK) {
+                try {
+                    //バイナリ形式でシリアル化
+#pragma warning disable SYSLIB0011//SYSLIB0011←エラー名
+                    var bf = new BinaryFormatter();
+#pragma warning restore SYSLIB0011
+
+                    using (FileStream fs = File.Open(
+                                    sfdReportFileSave.FileName, FileMode.Create)) {
+                        bf.Serialize(fs, listCarReports);
+                    }
+                }
+                catch (Exception ex) {
+                    tsslbMessage.Text = "ファイル書き出しエラー";
+                    MessageBox.Show(ex.Message);//より具体的なエラーを出力
+
+                }
+            }
+        }
+
+        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e) {
+            reportSaveFile();
+        }
+
+        private void 開くToolStripMenuItem_Click(object sender, EventArgs e) {
+            reportOpenFile();
         }
     }
 }
