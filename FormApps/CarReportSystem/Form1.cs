@@ -179,18 +179,27 @@ namespace CarReportSystem {
             dgvRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
 
             //設定ファイルを読み込みする処理
-            using (var reader = XmlReader.Create("settings.xml")) {
-                var serializer = new XmlSerializer(typeof(Settings));
-                settings = serializer.Deserialize(reader) as Settings;
+            if (File.Exists("settings.xml")) {
                 try {
-                    BackColor = Color.FromArgb(settings.MainFormBackColor);
+                    using (var reader = XmlReader.Create("settings.xml")) {
+                        var serializer = new XmlSerializer(typeof(Settings));
+                        settings = serializer.Deserialize(reader) as Settings;//参照型のキャスト(as)
+                        //背景色の設定
+                        BackColor = Color.FromArgb(settings.MainFormBackColor);
+                        //設定クラスのインスタンスにも現在の設定色を設定
+                        //settings.MainFormBackColor = BackColor.ToArgb();
+                    }
                 }
                 catch (Exception ex) {
-                    tsslbMessage.Text = "色の設定に失敗しました";
+                    tsslbMessage.Text = "設定ファイルの書き出しエラー";
+                    MessageBox.Show(ex.Message);//←より具体的なエラーを出力
                 }
+            } else {
+                tsslbMessage.Text = "設定ファイルがありません";
+            }
+
                 
 
-            }
         }
 
         private void tsmiExit_Click(object sender, EventArgs e) {
@@ -275,10 +284,17 @@ namespace CarReportSystem {
         //フォームが閉じたら呼ばれる
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
             //設定ファイルへ色情報を保存する処理（シリアル化）
-            using (var writer = XmlWriter.Create("settings.xml")) {
-                var serializer = new XmlSerializer(settings.GetType());
-                serializer.Serialize(writer, settings);
+            try {
+                using (var writer = XmlWriter.Create("settings.xml")) {
+                    var serializer = new XmlSerializer(settings.GetType());
+                    serializer.Serialize(writer, settings);
+                }
             }
+            catch (Exception ex) {
+                tsslbMessage.Text = "設定ファイルの書き出しエラー";
+                MessageBox.Show(ex.Message);//←より具体的なエラーを出力
+            }
+            
 
         }
 
