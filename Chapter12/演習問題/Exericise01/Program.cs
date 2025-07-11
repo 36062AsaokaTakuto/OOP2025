@@ -32,20 +32,25 @@ namespace Exericise01 {
             Serialize("employees.json", employees);
 
             //問題12.1.3
-            var empdata = Deserialize_f("employees.json");
-            foreach (var empd in empdata)
-                Console.WriteLine(empd);
+            //var empdata = Deserialize_f("employees.json");
+            //foreach (var empd in empdata)
+            //    Console.WriteLine(empd);
         }
         //問題12.1.1
         static string Serialize(Employee emp) {
             var options = new JsonSerializerOptions {
             WriteIndented = true,
-            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
+            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
-            return JsonSerializer.Serialize(emp, options);
+            string jsonString = JsonSerializer.Serialize(emp, options);
+            return jsonString;
         }
 
         static Employee? Deserialize(string text) {
+            var options = new JsonSerializerOptions {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            };
             var novelist = JsonSerializer.Deserialize<Employee>(text);
             return novelist;
         }
@@ -53,15 +58,18 @@ namespace Exericise01 {
         //問題12.1.2
         //シリアル化してファイルへ出力する
         static void Serialize(string filePath, IEnumerable<Employee> employees) {
-
+            //var text = File.ReadAllText(filePath);
+            //var novelist = JsonSerializer.Deserialize<List<Employee>>(text);
+            //novelist?.ForEach(Console.WriteLine);
         }
 
         //問題12.1.3
         //シリアル化してファイルへ出力する
-        static Employee[] Deserialize_f(string filePath) {
+        //static Employee[] Deserialize_f(string filePath) {
 
-            return null;
-        }
+
+
+        //}
 
     }
     public record Employee {
