@@ -1,6 +1,8 @@
 ﻿using System.Text.Json;
 using System.Text.Unicode;
 using System.Text.Encodings.Web;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace Exericise01 {
     internal class Program {
@@ -51,16 +53,21 @@ namespace Exericise01 {
             var options = new JsonSerializerOptions {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
-            var novelist = JsonSerializer.Deserialize<Employee>(text);
-            return novelist;
+            return JsonSerializer.Deserialize<Employee>(text);
+            
         }
 
         //問題12.1.2
         //シリアル化してファイルへ出力する
         static void Serialize(string filePath, IEnumerable<Employee> employees) {
-            //var text = File.ReadAllText(filePath);
-            //var novelist = JsonSerializer.Deserialize<List<Employee>>(text);
-            //novelist?.ForEach(Console.WriteLine);
+            var options = new JsonSerializerOptions {
+                WriteIndented = true,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            };
+            var serializer = JsonSerializer.Serialize(employees,options);
+            Console.WriteLine(serializer);
+            File.WriteAllText(filePath, serializer);
         }
 
         //問題12.1.3
