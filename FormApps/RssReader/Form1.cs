@@ -39,17 +39,16 @@ namespace RssReader {
         //タイトルを選択（クリック)したときに呼ばれるイベントハンドラ
         private void lbTitles_Click(object sender, EventArgs e) {
             webView21.Source = new Uri(items[lbTitles.SelectedIndex].Link ?? "https://www.yahoo.co.jp/");
-            //if () {
-
-            //}
         }
 
         private void btMove_Click(object sender, EventArgs e) {
             webView21.Source = new Uri(items[lbTitles.SelectedIndex + 1].Link ?? "https://www.yahoo.co.jp/");
+            lbTitles.SelectedIndex++;
         }
 
         private void btReturn_Click(object sender, EventArgs e) {
             webView21.Source = new Uri(items[lbTitles.SelectedIndex - 1].Link ?? "https://www.yahoo.co.jp/");
+            lbTitles.SelectedIndex--;
         }
     }
 }
