@@ -198,7 +198,7 @@ namespace CarReportSystem {
                 tsslbMessage.Text = "設定ファイルがありません";
             }
 
-                
+
 
         }
 
@@ -294,7 +294,7 @@ namespace CarReportSystem {
                 tsslbMessage.Text = "設定ファイルの書き出しエラー";
                 MessageBox.Show(ex.Message);//←より具体的なエラーを出力
             }
-            
+
 
         }
 

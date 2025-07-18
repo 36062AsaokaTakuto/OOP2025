@@ -17,6 +17,7 @@ namespace Exericise01 {
             Console.WriteLine(jsonString);
             var obj = Deserialize(jsonString);
             Console.WriteLine(obj);
+            Console.WriteLine();
 
             //問題12.1.2
             Employee[] employees = [
@@ -34,9 +35,9 @@ namespace Exericise01 {
             Serialize("employees.json", employees);
 
             //問題12.1.3
-            //var empdata = Deserialize_f("employees.json");
-            //foreach (var empd in empdata)
-            //    Console.WriteLine(empd);
+            var empdata = Deserialize_f("employees.json");
+            foreach (var empd in empdata)
+                Console.WriteLine(empd);
         }
         //問題12.1.1
         static string Serialize(Employee emp) {
@@ -53,7 +54,7 @@ namespace Exericise01 {
             var options = new JsonSerializerOptions {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
-            return JsonSerializer.Deserialize<Employee>(text);
+            return JsonSerializer.Deserialize<Employee>(text,options);
             
         }
 
@@ -65,23 +66,28 @@ namespace Exericise01 {
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
-            var serializer = JsonSerializer.Serialize(employees,options);
-            Console.WriteLine(serializer);
-            File.WriteAllText(filePath, serializer);
+            byte[] utf8bytes = JsonSerializer.SerializeToUtf8Bytes(employees,options);
+            File.WriteAllBytes(filePath, utf8bytes);
         }
 
         //問題12.1.3
-        //シリアル化してファイルへ出力する
-        //static Employee[] Deserialize_f(string filePath) {
+        //逆シリアル化して返却する
+        static Employee[] Deserialize_f(string filePath) {
+            var options = new JsonSerializerOptions {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                WriteIndented = true,
+            };
+            var text = File.ReadAllText(filePath);
+            var employees = JsonSerializer.Deserialize<Employee[]>(text, options);
+            return employees ?? [];
 
-
-
-        //}
+        }
 
     }
     public record Employee {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public DateTime HireDate { get; set; }
     }
 }
