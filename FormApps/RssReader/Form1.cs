@@ -46,29 +46,32 @@ namespace RssReader {
         }
 
 
-        private void btGoFoward_Click(object sender, EventArgs e) {
-            if (lbTitles.SelectedIndex < 0 || lbTitles.SelectedIndex + 1 >= items.Count) {
-                btGoFoward.Enabled = false;
-                return;
-            }
-            wvRssLink.Source = new Uri(items[lbTitles.SelectedIndex + 1].Link ?? "https://www.yahoo.co.jp/");
-            lbTitles.SelectedIndex++;
+        private void btGoForward_Click(object sender, EventArgs e) {
+            wvRssLink.GoForward();
 
         }
 
         private void btGoBack_Click(object sender, EventArgs e) {
-            if (lbTitles.SelectedIndex < 0 || lbTitles.SelectedIndex - 1 < 0) {
-                btGoBack.Enabled = false;
-                return;
-            }
-            wvRssLink.Source = new Uri(items[lbTitles.SelectedIndex - 1].Link ?? "https://www.yahoo.co.jp/");
-            lbTitles.SelectedIndex--;
+            wvRssLink.GoBack();
 
         }
 
         private void wvRssLink_NavigationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e) {
-            btGoFoward.Enabled = true;
-            btGoBack.Enabled = true;
+
+
+        }
+
+        private void wvRssLink_SourceChanged(object sender, Microsoft.Web.WebView2.Core.CoreWebView2SourceChangedEventArgs e) {
+            GoForwardBtEnableSet();
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            GoForwardBtEnableSet();
+        }
+
+        private void GoForwardBtEnableSet() {
+            btGoBack.Enabled = wvRssLink.CanGoBack;
+            btGoForward.Enabled = wvRssLink.CanGoForward;
         }
     }
 }

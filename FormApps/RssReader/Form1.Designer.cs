@@ -27,7 +27,7 @@
             btRssGet = new Button();
             lbTitles = new ListBox();
             wvRssLink = new Microsoft.Web.WebView2.WinForms.WebView2();
-            btGoFoward = new Button();
+            btGoForward = new Button();
             btGoBack = new Button();
             ((System.ComponentModel.ISupportInitialize)wvRssLink).BeginInit();
             SuspendLayout();
@@ -75,17 +75,18 @@
             wvRssLink.TabIndex = 3;
             wvRssLink.ZoomFactor = 1D;
             wvRssLink.NavigationCompleted += wvRssLink_NavigationCompleted;
+            wvRssLink.SourceChanged += wvRssLink_SourceChanged;
             // 
-            // btGoFoward
+            // btGoForward
             // 
-            btGoFoward.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            btGoFoward.Location = new Point(97, 11);
-            btGoFoward.Name = "btGoFoward";
-            btGoFoward.Size = new Size(75, 33);
-            btGoFoward.TabIndex = 4;
-            btGoFoward.Text = "進む";
-            btGoFoward.UseVisualStyleBackColor = true;
-            btGoFoward.Click += btGoFoward_Click;
+            btGoForward.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            btGoForward.Location = new Point(97, 11);
+            btGoForward.Name = "btGoForward";
+            btGoForward.Size = new Size(75, 33);
+            btGoForward.TabIndex = 4;
+            btGoForward.Text = "進む";
+            btGoForward.UseVisualStyleBackColor = true;
+            btGoForward.Click += btGoForward_Click;
             // 
             // btGoBack
             // 
@@ -104,13 +105,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1115, 658);
             Controls.Add(btGoBack);
-            Controls.Add(btGoFoward);
+            Controls.Add(btGoForward);
             Controls.Add(wvRssLink);
             Controls.Add(lbTitles);
             Controls.Add(btRssGet);
             Controls.Add(tbUrl);
             Name = "Form1";
             Text = "RSSリーダー";
+            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)wvRssLink).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -122,7 +124,7 @@
         private Button btRssGet;
         private ListBox lbTitles;
         private Microsoft.Web.WebView2.WinForms.WebView2 wvRssLink;
-        private Button btGoFoward;
+        private Button btGoForward;
         private Button btGoBack;
     }
 }
