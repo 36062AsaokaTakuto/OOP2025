@@ -26,10 +26,10 @@
             tbUrl = new TextBox();
             btRssGet = new Button();
             lbTitles = new ListBox();
-            webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
-            btMove = new Button();
-            btReturn = new Button();
-            ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
+            wvRssLink = new Microsoft.Web.WebView2.WinForms.WebView2();
+            btGoFoward = new Button();
+            btGoBack = new Button();
+            ((System.ComponentModel.ISupportInitialize)wvRssLink).BeginInit();
             SuspendLayout();
             // 
             // tbUrl
@@ -63,54 +63,55 @@
             lbTitles.TabIndex = 2;
             lbTitles.Click += lbTitles_Click;
             // 
-            // webView21
+            // wvRssLink
             // 
-            webView21.AllowExternalDrop = true;
-            webView21.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            webView21.CreationProperties = null;
-            webView21.DefaultBackgroundColor = Color.White;
-            webView21.Location = new Point(491, 51);
-            webView21.Name = "webView21";
-            webView21.Size = new Size(612, 592);
-            webView21.TabIndex = 3;
-            webView21.ZoomFactor = 1D;
+            wvRssLink.AllowExternalDrop = true;
+            wvRssLink.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            wvRssLink.CreationProperties = null;
+            wvRssLink.DefaultBackgroundColor = Color.White;
+            wvRssLink.Location = new Point(491, 51);
+            wvRssLink.Name = "wvRssLink";
+            wvRssLink.Size = new Size(612, 592);
+            wvRssLink.TabIndex = 3;
+            wvRssLink.ZoomFactor = 1D;
+            wvRssLink.NavigationCompleted += wvRssLink_NavigationCompleted;
             // 
-            // btMove
+            // btGoFoward
             // 
-            btMove.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            btMove.Location = new Point(97, 11);
-            btMove.Name = "btMove";
-            btMove.Size = new Size(75, 33);
-            btMove.TabIndex = 4;
-            btMove.Text = "進む";
-            btMove.UseVisualStyleBackColor = true;
-            btMove.Click += btMove_Click;
+            btGoFoward.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            btGoFoward.Location = new Point(97, 11);
+            btGoFoward.Name = "btGoFoward";
+            btGoFoward.Size = new Size(75, 33);
+            btGoFoward.TabIndex = 4;
+            btGoFoward.Text = "進む";
+            btGoFoward.UseVisualStyleBackColor = true;
+            btGoFoward.Click += btGoFoward_Click;
             // 
-            // btReturn
+            // btGoBack
             // 
-            btReturn.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            btReturn.Location = new Point(16, 11);
-            btReturn.Name = "btReturn";
-            btReturn.Size = new Size(75, 33);
-            btReturn.TabIndex = 5;
-            btReturn.Text = "戻る";
-            btReturn.UseVisualStyleBackColor = true;
-            btReturn.Click += btReturn_Click;
+            btGoBack.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            btGoBack.Location = new Point(16, 11);
+            btGoBack.Name = "btGoBack";
+            btGoBack.Size = new Size(75, 33);
+            btGoBack.TabIndex = 5;
+            btGoBack.Text = "戻る";
+            btGoBack.UseVisualStyleBackColor = true;
+            btGoBack.Click += btGoBack_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1115, 658);
-            Controls.Add(btReturn);
-            Controls.Add(btMove);
-            Controls.Add(webView21);
+            Controls.Add(btGoBack);
+            Controls.Add(btGoFoward);
+            Controls.Add(wvRssLink);
             Controls.Add(lbTitles);
             Controls.Add(btRssGet);
             Controls.Add(tbUrl);
             Name = "Form1";
             Text = "RSSリーダー";
-            ((System.ComponentModel.ISupportInitialize)webView21).EndInit();
+            ((System.ComponentModel.ISupportInitialize)wvRssLink).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -120,8 +121,8 @@
         private TextBox tbUrl;
         private Button btRssGet;
         private ListBox lbTitles;
-        private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
-        private Button btMove;
-        private Button btReturn;
+        private Microsoft.Web.WebView2.WinForms.WebView2 wvRssLink;
+        private Button btGoFoward;
+        private Button btGoBack;
     }
 }

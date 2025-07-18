@@ -38,17 +38,37 @@ namespace RssReader {
 
         //タイトルを選択（クリック)したときに呼ばれるイベントハンドラ
         private void lbTitles_Click(object sender, EventArgs e) {
-            webView21.Source = new Uri(items[lbTitles.SelectedIndex].Link ?? "https://www.yahoo.co.jp/");
+            if (lbTitles.SelectedIndex < 0) {
+                MessageBox.Show("タイトルがありません");
+                return;
+            }
+            wvRssLink.Source = new Uri(items[lbTitles.SelectedIndex].Link ?? "https://www.yahoo.co.jp/");
         }
 
-        private void btMove_Click(object sender, EventArgs e) {
-            webView21.Source = new Uri(items[lbTitles.SelectedIndex + 1].Link ?? "https://www.yahoo.co.jp/");
+
+        private void btGoFoward_Click(object sender, EventArgs e) {
+            if (lbTitles.SelectedIndex < 0 || lbTitles.SelectedIndex + 1 >= items.Count) {
+                btGoFoward.Enabled = false;
+                return;
+            }
+            wvRssLink.Source = new Uri(items[lbTitles.SelectedIndex + 1].Link ?? "https://www.yahoo.co.jp/");
             lbTitles.SelectedIndex++;
+
         }
 
-        private void btReturn_Click(object sender, EventArgs e) {
-            webView21.Source = new Uri(items[lbTitles.SelectedIndex - 1].Link ?? "https://www.yahoo.co.jp/");
+        private void btGoBack_Click(object sender, EventArgs e) {
+            if (lbTitles.SelectedIndex < 0 || lbTitles.SelectedIndex - 1 < 0) {
+                btGoBack.Enabled = false;
+                return;
+            }
+            wvRssLink.Source = new Uri(items[lbTitles.SelectedIndex - 1].Link ?? "https://www.yahoo.co.jp/");
             lbTitles.SelectedIndex--;
+
+        }
+
+        private void wvRssLink_NavigationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e) {
+            btGoFoward.Enabled = true;
+            btGoBack.Enabled = true;
         }
     }
 }
