@@ -23,22 +23,17 @@
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            tbUrl = new TextBox();
             btRssGet = new Button();
             lbTitles = new ListBox();
             wvRssLink = new Microsoft.Web.WebView2.WinForms.WebView2();
             btGoForward = new Button();
             btGoBack = new Button();
+            cbUrl = new ComboBox();
+            cbFavorite = new ComboBox();
+            label1 = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)wvRssLink).BeginInit();
             SuspendLayout();
-            // 
-            // tbUrl
-            // 
-            tbUrl.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            tbUrl.Location = new Point(178, 11);
-            tbUrl.Name = "tbUrl";
-            tbUrl.Size = new Size(473, 33);
-            tbUrl.TabIndex = 0;
             // 
             // btRssGet
             // 
@@ -57,11 +52,12 @@
             lbTitles.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 128);
             lbTitles.FormattingEnabled = true;
             lbTitles.ItemHeight = 21;
-            lbTitles.Location = new Point(12, 51);
+            lbTitles.Location = new Point(12, 105);
             lbTitles.Name = "lbTitles";
             lbTitles.Size = new Size(450, 592);
             lbTitles.TabIndex = 2;
             lbTitles.Click += lbTitles_Click;
+            lbTitles.SelectedIndexChanged += lbTitles_Click;
             // 
             // wvRssLink
             // 
@@ -69,12 +65,11 @@
             wvRssLink.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             wvRssLink.CreationProperties = null;
             wvRssLink.DefaultBackgroundColor = Color.White;
-            wvRssLink.Location = new Point(491, 51);
+            wvRssLink.Location = new Point(491, 105);
             wvRssLink.Name = "wvRssLink";
-            wvRssLink.Size = new Size(612, 592);
+            wvRssLink.Size = new Size(612, 589);
             wvRssLink.TabIndex = 3;
             wvRssLink.ZoomFactor = 1D;
-            wvRssLink.NavigationCompleted += wvRssLink_NavigationCompleted;
             wvRssLink.SourceChanged += wvRssLink_SourceChanged;
             // 
             // btGoForward
@@ -99,17 +94,59 @@
             btGoBack.UseVisualStyleBackColor = true;
             btGoBack.Click += btGoBack_Click;
             // 
+            // cbUrl
+            // 
+            cbUrl.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            cbUrl.FormattingEnabled = true;
+            cbUrl.Location = new Point(178, 11);
+            cbUrl.Name = "cbUrl";
+            cbUrl.Size = new Size(473, 33);
+            cbUrl.TabIndex = 6;
+            // 
+            // cbFavorite
+            // 
+            cbFavorite.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            cbFavorite.FormattingEnabled = true;
+            cbFavorite.Location = new Point(178, 52);
+            cbFavorite.Name = "cbFavorite";
+            cbFavorite.Size = new Size(473, 33);
+            cbFavorite.TabIndex = 6;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            label1.Location = new Point(27, 60);
+            label1.Name = "label1";
+            label1.Size = new Size(131, 25);
+            label1.TabIndex = 7;
+            label1.Text = "お気に入り登録";
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            button1.Location = new Point(657, 52);
+            button1.Name = "button1";
+            button1.Size = new Size(77, 33);
+            button1.TabIndex = 8;
+            button1.Text = "登録";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += btGet;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1115, 658);
+            ClientSize = new Size(1115, 709);
+            Controls.Add(button1);
+            Controls.Add(label1);
+            Controls.Add(cbFavorite);
+            Controls.Add(cbUrl);
             Controls.Add(btGoBack);
             Controls.Add(btGoForward);
             Controls.Add(wvRssLink);
             Controls.Add(lbTitles);
             Controls.Add(btRssGet);
-            Controls.Add(tbUrl);
             Name = "Form1";
             Text = "RSSリーダー";
             Load += Form1_Load;
@@ -119,12 +156,14 @@
         }
 
         #endregion
-
-        private TextBox tbUrl;
         private Button btRssGet;
         private ListBox lbTitles;
         private Microsoft.Web.WebView2.WinForms.WebView2 wvRssLink;
         private Button btGoForward;
         private Button btGoBack;
+        private ComboBox cbUrl;
+        private ComboBox cbFavorite;
+        private Label label1;
+        private Button button1;
     }
 }
