@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Security.Policy;
 using System.Threading.Channels;
@@ -72,12 +73,13 @@ namespace RssReader {
 
         private void btGoForward_Click(object sender, EventArgs e) {
             wvRssLink.GoForward();
+            GoForwardBtEnableSet();
 
         }
 
         private void btGoBack_Click(object sender, EventArgs e) {
             wvRssLink.GoBack();
-
+            GoForwardBtEnableSet();
         }
 
         private void wvRssLink_SourceChanged(object sender, Microsoft.Web.WebView2.Core.CoreWebView2SourceChangedEventArgs e) {
@@ -85,7 +87,10 @@ namespace RssReader {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            cbUrl.DataSource = rssUrlDict.Select(k => k.Key).ToList();
+            foreach (var key in rssUrlDict.Keys) {
+                cbUrl.Items.Add(key);
+            }
+
             GoForwardBtEnableSet();
         }
 
@@ -95,7 +100,17 @@ namespace RssReader {
         }
 
         private void btGet(object sender, EventArgs e) {
+            rssUrlDict.Add(cbFavorite.Text, cbUrl.Text);
+            cbUrl.Items.Add(cbFavorite.Text);
 
+        }
+
+        private void btDelete_Click(object sender, EventArgs e) {
+            cbUrl.Items.Remove(cbUrl.Text);
+            cbUrl.Text = string.Empty;
+            cbFavorite.Text = string.Empty;
+            rssUrlDict.Remove(cbUrl.Text);
+            lbTitles.Items.Clear();
         }
     }
 }
