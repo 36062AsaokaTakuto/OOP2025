@@ -90,6 +90,7 @@ namespace RssReader {
             foreach (var key in rssUrlDict.Keys) {
                 cbUrl.Items.Add(key);
             }
+            BackColor = Color.AliceBlue;
 
             GoForwardBtEnableSet();
         }
@@ -100,8 +101,14 @@ namespace RssReader {
         }
 
         private void btGet(object sender, EventArgs e) {
+            if (!Uri.IsWellFormedUriString(cbUrl.Text, UriKind.Absolute)) {
+                MessageBox.Show("URLではありません");
+                return;
+            }
+
             rssUrlDict.Add(cbFavorite.Text, cbUrl.Text);
             cbUrl.Items.Add(cbFavorite.Text);
+            cbFavorite.Text = string.Empty;
             MessageBox.Show("お気に入り登録完了");
         }
 
@@ -115,6 +122,10 @@ namespace RssReader {
             MessageBox.Show("削除完了");
         }
 
+        //手順
+        //①交互に色を変更したいリストボックスのDrawModeプロパティを、OwnerDrawFixedに変更
+        //②イベントから「DrawItem」をダブルクリック
+        //③以下のイベントハンドラが自動生成されたら中の処理をコピペ
         private void lbTitles_DrawItem(object sender, DrawItemEventArgs e) {
             var idx = e.Index;                                                      //描画対象の行
             if (idx == -1) return;                                                  //範囲外なら何もしない
