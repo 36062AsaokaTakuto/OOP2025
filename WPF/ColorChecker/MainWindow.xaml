@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorChecker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="700">
+        Title="MainWindow" Height="300" Width="700" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -30,29 +30,43 @@
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Ｒ" FontSize="30"
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Slider x:Name="rSlider" Grid.Row="0" Grid.Column="1" 
-                    Maximum="255" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"/>
+                    Maximum="255" VerticalAlignment="Center" IsSnapToTickEnabled="True" ValueChanged="Slider_ValueChanged"/>
             <TextBox x:Name="rValue" Grid.Row="0" Grid.Column="2" 
                      VerticalAlignment="Center" FontSize="20" TextAlignment="Right"
-                     Text="{Binding ElementName=rSlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:0}}" />
+                     Text="{Binding ElementName=rSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
             
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Ｇ" FontSize="30"
                     HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Slider x:Name="gSlider" Grid.Row="1" Grid.Column="1" 
-                    Maximum="255" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"/>
+                    Maximum="255" VerticalAlignment="Center" IsSnapToTickEnabled="True" ValueChanged="Slider_ValueChanged"/>
             <TextBox x:Name="gValue" Grid.Row="1" Grid.Column="2" 
                     VerticalAlignment="Center" FontSize="20" TextAlignment="Right"
-                    Text="{Binding ElementName=gSlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:0}}"/>
+                    Text="{Binding ElementName=gSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"/>
             
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Ｂ" FontSize="30"
                     HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Slider x:Name="bSlider" Grid.Row="2" Grid.Column="1" 
-                    Maximum="255" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"/>
+                    Maximum="255" VerticalAlignment="Center" IsSnapToTickEnabled="True" ValueChanged="Slider_ValueChanged"/>
             <TextBox x:Name="bValue" Grid.Row="2" Grid.Column="2" 
                     VerticalAlignment="Center" FontSize="20" TextAlignment="Right"
-                    Text="{Binding ElementName=bSlider, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:0}}"/>
+                    Text="{Binding ElementName=bSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <ComboBox x:Name="colorSelectComboBox" Grid.Row="3" Grid.ColumnSpan="3" VerticalAlignment="Center" Width="200"/>
-                        
+            <ComboBox x:Name="colorSelectComboBox" ItemsSource="{Binding}" SelectedValue="{Binding Color}" 
+                      SelectedValuePath="Color" Grid.Row="3" Grid.ColumnSpan="3" VerticalAlignment="Center" Margin="20,0" SelectionChanged="colorSelectComboBox_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="20" Height="Auto" Margin="5,0" BorderThickness="1" BorderBrush="Black"  >
+                                <Border.Background>
+                                    <SolidColorBrush Color="{Binding Color}"/>
+                                </Border.Background>
+                            </Border>
+                            <TextBlock Text="{Binding Name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
         </Grid>
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
@@ -60,8 +74,8 @@
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
         <!--ここから追加-->
-            <Button x:Name="stockButton" Grid.Row="0" Width="220" Height="30" Click="stockButton_Click"/>
-            <ListBox x:Name="stockList" Grid.Row="1" Width="220" Height="Auto"/>
+            <Button x:Name="stockButton" Content="STOCK" Grid.Row="0" Width="220" Height="30" Click="stockButton_Click"/>
+            <ListBox x:Name="stockList" Grid.Row="1" Width="220" Height="Auto" SelectionChanged="stockList_SelectionChanged"/>
 
 
 
