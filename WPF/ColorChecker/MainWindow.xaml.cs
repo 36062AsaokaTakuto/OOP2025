@@ -41,22 +41,7 @@ namespace ColorChecker{
         //すべてのスライダーから呼ばれるイベントハンドラ
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             //colorAreaの色（背景色）は、スライダーで指定したRGBの色を表示する
-            var selectedColor = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
-            colorArea.Background = new SolidColorBrush(selectedColor);
-            MyColor? matchingColor = null;
-            foreach (MyColor item in colorSelectComboBox.Items) {
-                if (item.Color.Equals(selectedColor)) {
-                    matchingColor = item;
-                    break;
-                }
-            }
-
-            if (matchingColor != null) {
-                colorSelectComboBox.SelectedItem = matchingColor;
-            } else {
-                // 一致しない場合は表示しない
-                colorSelectComboBox.SelectedItem = null;
-            }
+            colorArea.Background = new SolidColorBrush(Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value));
         }
 
         private void stockButton_Click(object sender, RoutedEventArgs e) {
