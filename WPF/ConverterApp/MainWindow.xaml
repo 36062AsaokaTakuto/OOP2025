@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConverterApp"
         mc:Ignorable="d"
-        Title="Converter" SizeToContent="WidthAndHeight">
+        Title="ConverterApp" SizeToContent="WidthAndHeight">
     <StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBox Name="MetricValue" Margin="4" Width="100"/>
+            <TextBox Name="MetricValue" Margin="4" Width="100" Text="0.000" HorizontalAlignment="Right"/>
             <ComboBox Name="MetricUnit" Margin="4" Width="80"/>
         </StackPanel>
             
-        <StackPanel Orientation="Horizontal">
-            <Button Name="ImperialUnitToMetric" Margin="4" Width="40" Content="▲"/>
-            <Button Name="MetricToImperialUnit" Margin="4" Width="40" Content="▼"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Name="ImperialUnitToMetric" Margin="4" Width="40" Content="▲" Click="ImperialUnitToMetric_Click"/>
+            <Button Name="MetricToImperialUnit" Margin="4" Width="40" Content="▼" Click="MetricToImperialUnit_Click"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
-            <TextBox Name="ImperialValue" Margin="4" Width="100"/>
+            <TextBox Name="ImperialValue" Margin="4" Width="100" Text="0.000" HorizontalAlignment="Right"/>
             <ComboBox Name="ImperialUnit" Margin="4" Width="80"/>
         </StackPanel>
     </StackPanel>
