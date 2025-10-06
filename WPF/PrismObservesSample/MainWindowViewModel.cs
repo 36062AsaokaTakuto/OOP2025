@@ -25,21 +25,20 @@ namespace PrismObservesSample {
         }
 
         public MainWindowViewModel() {
-            SumCommand = new DelegateCommand(ExcuteSum,canExcuteSum);
+            SumCommand = new DelegateCommand(ExcuteSum,canExcuteSum)
+                .ObservesProperty(() => Input1)
+                .ObservesProperty(() => Input2);
         }
 
         //足し算の処理
         private void ExcuteSum() {
             //足し算の処理を記述
-            int num1 = int.Parse(_input1);
-            int num2 = int.Parse(_input2);
-            int result = num1 + num2;
-            Result = result.ToString();
+            Result = (int.Parse(Input1) + int.Parse(Input2)).ToString(); ;
         }
 
         //足し算処理を実行できるか否かのチェック
         private bool canExcuteSum() {
-            
+            return int.TryParse(Input1, out _) && int.TryParse(Input2, out _);//outの後の_(アンダーバー)は変換できるかどうかだけを知りたいときに使う。（値を捨てる）
         }
 
         public DelegateCommand SumCommand { get; }
