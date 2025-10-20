@@ -1,0 +1,65 @@
+﻿<Window x:Class="CustomerApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CustomerApp" SizeToContent="Height"
+        mc:Ignorable="d"
+        Title="顧客管理アプリケーション" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="名前" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,5,0"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="電話番号" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="PhoneTextBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,5,0"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="住所" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="AddressTextBox" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,5,0"/>
+            
+            
+            
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            <Button Content="登録" x:Name="SaveButton" Grid.Row="0" VerticalAlignment="Center" Margin="5,0,5,3" Click="SaveButton_Click"/>
+            <Button Content="更新" x:Name="UpdateButton" Grid.Row="1"  VerticalAlignment="Center" Margin="5,0,5,3" Click="UpdateButton_Click"/>
+            <Button Content="削除" x:Name="DeleteButton" Grid.Row="2" VerticalAlignment="Center" Margin="5,0,5,3" Click="DeleteButton_Click"/>
+            <Grid Grid.Column="0" Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="画像" x:Name="PictureButton" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Width="70" Height="80" Margin="5,0,5,3"/>
+            </Grid>
+            
+        </Grid>
+        <Grid Grid.Column="1" Grid.RowSpan="2">
+            <ListView x:Name="CustomerListView" Margin="0,1,0,0" Height="180" SelectionChanged="CustomerListView_SelectionChanged"/>
+        </Grid>
+
+    </Grid>
+    
+</Window>
