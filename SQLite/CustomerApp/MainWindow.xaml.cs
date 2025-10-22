@@ -1,4 +1,5 @@
 ﻿using CustomerApp.Data;
+using Microsoft.Win32;
 using SQLite;
 using System.IO;
 using System.Text;
@@ -25,7 +26,7 @@ public partial class MainWindow : Window {
         CustomerListView.ItemsSource = _customers;
     }
 
-    string imagePath = "C:\\Users\\infosys\\Desktop\\車画像集";
+    private string? selectedImagePath;
 
     private void ReadDatabase() {
         using (var connection = new SQLiteConnection(App.databasePath)) {
@@ -39,6 +40,7 @@ public partial class MainWindow : Window {
             Name = NameTextBox.Text,
             Phone = PhoneTextBox.Text,
             Address = AddressTextBox.Text,
+            Picture = selectedImagePath is not null ? File.ReadAllBytes(selectedImagePath) : Array.Empty<byte>(),
         };
 
         using (var connection = new SQLiteConnection(App.databasePath)) {
@@ -59,7 +61,7 @@ public partial class MainWindow : Window {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
-                Picture = File.ReadAllBytes(imagePath),
+                Picture = selectedImagePath != null ? File.ReadAllBytes(selectedImagePath) : Array.Empty<byte>(),
             };
 
             connection.Update(person);
@@ -91,5 +93,26 @@ public partial class MainWindow : Window {
         NameTextBox.Text = SelectedCustomer?.Name;
         PhoneTextBox.Text = SelectedCustomer?.Phone;
         AddressTextBox.Text = SelectedCustomer?.Address;
+        if (SelectedCustomer?.Picture?.Length > 0) {
+            using (var ms = new MemoryStream(SelectedCustomer.Picture)) {
+                var bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = ms;
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+                PictureImage.Source = bitmap;
+            }
+        } else {
+            PictureImage.Source = null;
+        }
+
+    }
+
+    private void PictureButton_Click(object sender, RoutedEventArgs e) {
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        if (openFileDialog.ShowDialog() ?? false) {
+            selectedImagePath = openFileDialog.FileName;
+            PictureImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+        }
     }
 }
