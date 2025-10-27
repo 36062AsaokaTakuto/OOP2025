@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CustomerApp" SizeToContent="Height"
+        xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
-        Title="顧客管理アプリケーション" Width="850">
+        Title="顧客管理アプリケーション" Height="400" Width="1000">
     <Window.Resources>
         <local:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter"/>
     </Window.Resources>
@@ -21,7 +21,7 @@
         <Grid Grid.Column="0" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 
@@ -30,42 +30,47 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="名前" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1" Margin="3"/>
-            <Label Grid.Row="1" Grid.Column="0" Content="電話番号" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox x:Name="PhoneTextBox" Grid.Row="1" Grid.Column="1" Margin="3"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="住所" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <TextBox x:Name="AddressTextBox" Grid.Row="2" Grid.Column="1" Margin="3"/>
-            
-            
-            
+            <Label Grid.Row="0" Grid.Column="0" Content="名前" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1" Margin="3" FontSize="25" TextChanged="InputFieldsChanged"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="電話番号" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="PhoneTextBox" Grid.Row="1" Grid.Column="1" Margin="3" FontSize="25" TextChanged="InputFieldsChanged"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="住所" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="AddressTextBox" Grid.Row="2" Grid.Column="1" Margin="3" FontSize="25" TextChanged="InputFieldsChanged"/>            
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="4*"/>
+                <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
-            <Button Content="登録" x:Name="SaveButton" Grid.Row="0" VerticalAlignment="Center" Margin="5,0,5,3" Click="SaveButton_Click"/>
-            <Button Content="更新" x:Name="UpdateButton" Grid.Row="1"  VerticalAlignment="Center" Margin="5,0,5,3" Click="UpdateButton_Click"/>
-            <Button Content="削除" x:Name="DeleteButton" Grid.Row="2" VerticalAlignment="Center" Margin="5,0,5,3" Click="DeleteButton_Click"/>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="登録" x:Name="SaveButton" Grid.Column="0" Margin="5,5" FontSize="20" Click="SaveButton_Click"/>
+                <Button Content="更新" x:Name="UpdateButton" Grid.Column="1" Margin="5,5" FontSize="20" Click="UpdateButton_Click"/>
+                <Button Content="削除" x:Name="DeleteButton" Grid.Column="2" Margin="5,5" FontSize="20" Click="DeleteButton_Click"/>
+            </Grid>
             <Grid Grid.Column="0" Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="4*"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="画像" x:Name="PictureButton" Grid.Column="0" Width="70" Height="80" Margin="0,0,5,5" Click="PictureButton_Click"/>
-                <Image  x:Name="PictureImage" Grid.Column="1" Height="80" Margin="5,0,5,5" Stretch="Uniform"/>
+                <Button Content="画像" x:Name="PictureButton" Grid.Column="0" Margin="5" FontSize="20" Click="PictureButton_Click"/>
+                <Border Grid.Column="1">
+                    <Image  x:Name="PictureImage" Grid.Column="1" Margin="5,0,5,5" Stretch="Fill"/>    
+                </Border>
+                
             </Grid>
             
         </Grid>
         <Grid Grid.Column="1" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="4*"/>
+                <RowDefinition Height="7*"/>
             </Grid.RowDefinitions>
-            <TextBox x:Name="SearchTextBox" Grid.Row="0" Margin="5" FontSize="20"/>
+            <TextBox x:Name="SearchTextBox" Grid.Row="0" Margin="5" FontSize="25" TextChanged="SearchTextBox_TextChanged"/>
             <ListView x:Name="CustomerListView" Grid.Row="1" Margin="5" SelectionChanged="CustomerListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -75,13 +80,13 @@
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.Column="0">
+                            <StackPanel Grid.Column="1">
                                 <TextBlock Text="{Binding Id}" Margin="5"/>
                                 <TextBlock Text="{Binding Name}" FontSize="20" Margin="5"/>
                                 <TextBlock Text="{Binding Phone}" Foreground="Purple" Margin="5"/>
                                 <TextBlock Text="{Binding Address}" Foreground="Green" Margin="5"/>
                             </StackPanel>
-                            <Image Grid.Column="1" Width="200" Height="200" Stretch="Uniform" Margin="10"
+                            <Image Grid.Column="0" Height="100" Stretch="Uniform" 
                                     Source="{Binding Picture, Converter={StaticResource ByteArrayToImageConverter}}"/>
                         </Grid>    
                     </DataTemplate>
