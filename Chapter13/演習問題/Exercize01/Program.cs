@@ -28,7 +28,12 @@ namespace Exercize01 {
         }
 
         private static void Exercise1_3() {
-            
+            var selected = Library.Books
+                .GroupBy(b => b.PublishedYear)
+                .OrderBy(b => b.Key);
+            foreach (var book in selected) {
+                Console.WriteLine($"{book.Key}年:{book.Count()}");
+            }
         }
 
         private static void Exercise1_4() {
