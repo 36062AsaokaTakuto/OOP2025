@@ -1,4 +1,6 @@
 ﻿
+using System.Threading.Tasks.Dataflow;
+
 namespace Exercize01 {
     internal class Program {
         static void Main(string[] args) {
@@ -63,21 +65,21 @@ namespace Exercize01 {
         }
 
         private static void Exercise1_6() {
-            var books = Library.Books
+            var groups = Library.Books
                             .Join(Library.Categories,
-                                    book => book.CategoryId,
-                                    category => category.Id,
-                                    (book, category) => new {
-                                        book.Title,
-                                        Category = category.Name,
+                                    b => b.CategoryId,
+                                    c => c.Id,
+                                    (b, c) => new {
+                                        CategoryName = c.Name,
+                                        b.Title,
                                     }
                             )
-                            .GroupBy(c => c.Category)
-                            .OrderBy(c => c.Key);
-            foreach (var book in books) {
-                Console.WriteLine($"# {book.Key}");
-                foreach (var item in book) {
-                    Console.WriteLine($"   {item.Title}");
+                            .GroupBy(x => x.CategoryName)
+                            .OrderBy(x => x.Key);
+            foreach (var group in groups) {
+                Console.WriteLine($"# {group.Key}");
+                foreach (var book in group) {
+                    Console.WriteLine($"   {book.Title}");
                 }
             }
         }
@@ -90,7 +92,6 @@ namespace Exercize01 {
                                     category => category.Id,
                                     (book, category) => new {
                                         book.Title,
-                                        Category = category.Name,
                                         book.PublishedYear,
                                     }
                             )
