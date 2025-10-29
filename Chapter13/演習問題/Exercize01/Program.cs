@@ -65,7 +65,23 @@ namespace Exercize01 {
         }
 
         private static void Exercise1_6() {
-            
+            var books = Library.Books
+                            .Join(Library.Categories,
+                                    book => book.CategoryId,
+                                    category => category.Id,
+                                    (book, category) => new {
+                                        book.Title,
+                                        Category = category.Name,
+                                    }
+                            )
+                            .GroupBy(c => c.Category)
+                            .OrderBy(c => c.Key);
+            foreach (var book in books) {
+                Console.WriteLine($"# {book.Key}");
+                foreach (var item in book) {
+                    Console.WriteLine($"   {item.Title}");
+                }
+            }
         }
 
         private static void Exercise1_7() {
