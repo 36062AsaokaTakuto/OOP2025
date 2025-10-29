@@ -85,22 +85,22 @@ namespace Exercize01 {
         }
 
         private static void Exercise1_7() {
-            var books = Library.Books
-                            .Where(c => c.CategoryId == 1)
-                            .Join(Library.Categories,
-                                    book => book.CategoryId,
-                                    category => category.Id,
-                                    (book, category) => new {
-                                        book.Title,
-                                        book.PublishedYear,
+            var groups = Library.Categories
+                            .Where(x => x.Name.Equals("Development"))
+                            .Join(Library.Books,
+                                    c => c.Id,
+                                    b => b.CategoryId,
+                                    (c, b) => new {
+                                        b.Title,
+                                        b.PublishedYear,
                                     }
                             )
-                            .GroupBy(b => b.PublishedYear)
-                            .OrderBy(b => b.Key);
-            foreach (var book in books) {
-                Console.WriteLine($"# {book.Key}");
-                foreach (var item in book) {
-                    Console.WriteLine($"   {item.Title}");
+                            .GroupBy(x => x.PublishedYear)
+                            .OrderBy(x => x.Key);
+            foreach (var group in groups) {
+                Console.WriteLine($"# {group.Key}");
+                foreach (var book in group) {
+                    Console.WriteLine($"   {book.Title}");
                 }
             }
         }
