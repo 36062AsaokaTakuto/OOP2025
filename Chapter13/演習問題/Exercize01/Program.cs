@@ -50,7 +50,18 @@ namespace Exercize01 {
         }
 
         private static void Exercise1_5() {
-            
+            var books = Library.Books
+                            .Where(b => b.PublishedYear == 2022)
+                            .Join(Library.Categories,
+                                    book => book.CategoryId,
+                                    category => category.Id,
+                                    (book, category) => new {
+                                        Category = category.Name,
+                                    }
+                            );
+            foreach (var book in books.Distinct()) {
+                Console.WriteLine($"{book.Category}");
+            }
         }
 
         private static void Exercise1_6() {
