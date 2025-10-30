@@ -1,4 +1,5 @@
 ﻿
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks.Dataflow;
 
 namespace Exercize01 {
@@ -106,17 +107,19 @@ namespace Exercize01 {
         }
 
         private static void Exercise1_8() {
-            var groups = Library.Categories
+            var categoryNames = Library.Categories
                             .GroupJoin(Library.Books,
                                     c => c.Id,
                                     b => b.CategoryId,
                                     (c, books) => new {
-                                        Category = c.Name,
-                                        Books = books
+                                        CategoryName = c.Name,
+                                        Count = books.Count(),
                                     }
-                            );
-            foreach (var group in groups.Where(x => x.Books.Count() >= 4)) {
-                Console.WriteLine(group.Category);
+                            )
+                            .Where(x => x.Count >= 4)
+                            .Select(x => x.CategoryName);
+            foreach (var name in categoryNames) {
+                Console.WriteLine(name);
             }
         }
     }
