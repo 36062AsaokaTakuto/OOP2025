@@ -1,20 +1,20 @@
 ﻿namespace Section01 {
     internal class Program {
         static void Main(string[] args) {
-            var books = Library.Books
-                            .Join(Library.Categories,
-                                    book => book.CategoryId,
-                                    category => category.Id,
-                                    (book, category) => new {
-                                        book.Title,
-                                        Category = category.Name,
-                                        book.PublishedYear
+            var groups = Library.Categories
+                            .GroupJoin(Library.Books,
+                                    c => c.Id,
+                                    b => b.CategoryId,
+                                    (c, books) => new {
+                                        Category = c.Name,
+                                        Books = books
                                     }
-                            )
-                            .OrderBy(b => b.PublishedYear)
-                            .ThenBy(b => b.Category);
-            foreach (var book in books) {
-                Console.WriteLine($"{book.Title},{book.Category},{book.PublishedYear}");
+                            );
+            foreach (var group in groups) {
+                Console.WriteLine(group.Category);
+                foreach (var book in group.Books) {
+                    Console.WriteLine($"   {book.Title} ({book.PublishedYear}年)");
+                }
             }
 
         }
