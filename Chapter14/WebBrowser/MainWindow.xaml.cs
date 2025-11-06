@@ -21,24 +21,27 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        InitializeWebView();
     }
-
-    private async void InitializeWebView() {
-        await WebView.EnsureCoreWebView2Async();
-    }
-
 
     private void BackButton_Click(object sender, RoutedEventArgs e) {
-
+        if (WebView.CanGoBack) {
+            WebView.GoBack();
+        }
     }
 
     private void ForwardButton_Click(object sender, RoutedEventArgs e) {
-
+        if (WebView.CanGoForward) {
+            WebView.GoForward();
+        }
     }
 
     private void GoButton_Click(object sender, RoutedEventArgs e) {
-        WebView.Source = new Uri(AddressBar.Text);
+        //WebView.Source = new Uri(AddressBar.Text);
+        var url = AddressBar.Text.Trim();
+
+        if (string.IsNullOrWhiteSpace(url)) return;
+
+        WebView.Source = new Uri(url);
     }
 
     
