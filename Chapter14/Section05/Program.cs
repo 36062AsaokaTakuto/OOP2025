@@ -1,22 +1,18 @@
-﻿namespace Section05 {
+﻿using Section01;
+
+namespace Section05 {
     internal class Program {
         static void Main(string[] args) {
-
-            Console.WriteLine("並列処理あり");
-
-            Parallel.For(0, 100, i => {
-                Console.WriteLine($"処理{i}開始");
-                Thread.Sleep(100);
-                Console.WriteLine($"処理{i}終了");
-            });
-
-            Console.WriteLine("並列処理なし");
-
-            for (int i = 0; i < 100; i++) {
-                Console.WriteLine($"処理{i}開始");
-                Thread.Sleep(100);
-                Console.WriteLine($"処理{i}終了");
+            var selected = Library.Books
+                .AsParallel()//これをつけるだけで並列化を行うことができる
+                .AsOrdered()//順序を保証したい場合はAsOrderedを追加
+                .Where(b => b.Price > 500 && b.Price < 2000)
+                .Select(b => new { b.Title });
+            foreach (var item in selected) {
+                Console.WriteLine(item.Title);
             }
+
+
         }
     }
 }
