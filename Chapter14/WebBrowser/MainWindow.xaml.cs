@@ -1,6 +1,8 @@
-﻿using Microsoft.Web.WebView2.WinForms;
+﻿using Microsoft.Web.WebView2.Core;
+using Microsoft.Web.WebView2.WinForms;
 using System.Security.Policy;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,6 +23,26 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        InitializeAsync();
+    }
+
+    private async void InitializeAsync() {
+        await WebView.EnsureCoreWebView2Async();
+
+        WebView.CoreWebView2.NavigationStarting += CoreWebView2_NavigationStarting;
+        WebView.CoreWebView2.NavigationCompleted += CoreWebView2_NavigationCompleted;
+    }
+
+    //読み込み開始したらプログレスバーを表示
+    private void CoreWebView2_NavigationStarting(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs e) {
+        LoadingBar.Visibility = Visibility.Visible;
+        LoadingBar.IsIndeterminate = true;
+    }    
+
+    //読み込み完了したらプログレスバーを非表示
+    private void CoreWebView2_NavigationCompleted(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e) {
+        LoadingBar.Visibility = Visibility.Collapsed;
+        LoadingBar.IsIndeterminate = true;
     }
 
     private void BackButton_Click(object sender, RoutedEventArgs e) {
