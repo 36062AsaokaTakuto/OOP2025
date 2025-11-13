@@ -1,0 +1,3 @@
+やること
+・SampleUnitCoverterをPrismを利用したものに修正する
+・完成したらテストをして動作に問題なければGitHubへ登録【GitHubコメント：Prism対応】
