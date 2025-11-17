@@ -217,6 +217,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Strategy", "Strategy", "{3A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceConverter", "Chapter15\Strategy\DistanceConverter\DistanceConverter.csproj", "{7F95F61B-7F67-4C94-984C-ED0D45BED693}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextFileProcessorDI", "Chapter15\TemplateMethod\TextFileProcessorDI\TextFileProcessorDI.csproj", "{4631E70C-45F8-4A6C-B8F3-5B8A5272D145}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -511,6 +513,10 @@ Global
 		{7F95F61B-7F67-4C94-984C-ED0D45BED693}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F95F61B-7F67-4C94-984C-ED0D45BED693}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F95F61B-7F67-4C94-984C-ED0D45BED693}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4631E70C-45F8-4A6C-B8F3-5B8A5272D145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4631E70C-45F8-4A6C-B8F3-5B8A5272D145}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4631E70C-45F8-4A6C-B8F3-5B8A5272D145}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4631E70C-45F8-4A6C-B8F3-5B8A5272D145}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -604,6 +610,7 @@ Global
 		{28EA86D4-B07F-46DA-ACA5-BEB7E6F4DBA8} = {78C91532-2612-4ECF-A15C-19CFC7C2F80D}
 		{3AEFFC16-9D13-41E4-8F8D-7ACDCE8BC8DB} = {001B8A55-C73F-4C35-ABDE-3BEF8EB00183}
 		{7F95F61B-7F67-4C94-984C-ED0D45BED693} = {3AEFFC16-9D13-41E4-8F8D-7ACDCE8BC8DB}
+		{4631E70C-45F8-4A6C-B8F3-5B8A5272D145} = {78C91532-2612-4ECF-A15C-19CFC7C2F80D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {641CCAFB-A648-4238-AA5B-48658BB24AD8}
