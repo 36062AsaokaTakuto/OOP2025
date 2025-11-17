@@ -45,11 +45,11 @@ namespace DistanceConverter {
         public override string UnitName => "マイル";
     }
 
-    public class KilloConverter : ConverterBase {
+    public class KillometerConverter : ConverterBase {
         public override bool IsMyUnit(string name) =>
-            name.ToLower() == "killo" || name == UnitName;
+            name.ToLower() == "killometer" || name == UnitName;
 
         protected override double Ratio => 1000;
-        public override string UnitName => "キロ";
+        public override string UnitName => "キロメートル";
     }
 }

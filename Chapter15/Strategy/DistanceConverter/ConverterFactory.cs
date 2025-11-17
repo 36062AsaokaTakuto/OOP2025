@@ -13,7 +13,7 @@ namespace DistanceConverter {
             new YardConverter(),
             new InchConverter(),
             new MileConverter(),
-            new KilloConverter(),
+            new KillometerConverter(),
         };
 
         public static ConverterBase? GetInstance(string name) => 
