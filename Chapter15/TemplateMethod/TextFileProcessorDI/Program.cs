@@ -1,11 +1,11 @@
 ﻿namespace TextFileProcessorDI {
     internal class Program {
         static void Main(string[] args) {
-            var service = new LineOutputService();
+            var service = new LineToHalfNumberService();
             var processor = new TextFileProcessor(service);
             Console.Write("パスの入力：");
 
-            processor.Run(Console.ReadLine());
+            processor.Run(Console.ReadLine().Trim('"'));
         }
     }
 }
